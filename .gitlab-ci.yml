@@ -1,0 +1,9 @@
+deploy_vercel:
+  stage: deploy
+  image: node:18
+  script:
+    - cd fe_invotrax
+    - npm install -g vercel
+    - vercel --prod --yes --token=$VERCEL_TOKEN  # Deploy to Vercel without confirmation
+  only:
+    - main  # Change this to your deployment branch
