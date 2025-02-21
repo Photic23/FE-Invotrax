@@ -5,10 +5,8 @@ deploy_vercel:
   stage: deploy
   image: node:18
   script:
-    - cd fe_invotrax
     - npm install -g vercel
-    c:\Users\Mahdy\Documents\Kuliah\Akademik\Semester 6\Propensi\Project\BE\.gitlab-ci.yml
+    - vercel --prod --yes --token=$VERCEL_TOKEN  # Deploy to Vercel without confirmation
   only:
     - dev  # Change this to your deployment branch
-
 
