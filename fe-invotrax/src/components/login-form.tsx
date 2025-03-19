@@ -36,7 +36,6 @@ export function LoginForm({
         throw new Error(data.detail || "Login failed");
       }
 
-      // Successful login, store token if your backend provides one
       if (data.access) {
         localStorage.setItem("token", data.access);
         // If you have a refresh token
@@ -58,9 +57,6 @@ export function LoginForm({
     <form className={cn("flex flex-col gap-6", className)} {...props} onSubmit={handleSubmit}>
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold">Login ke Akun Anda</h1>
-        <p className="text-balance text-sm text-muted-foreground">
-          Masukkan e-mail anda
-        </p>
       </div>
       <div className="grid gap-6">
         {error && (
@@ -82,9 +78,6 @@ export function LoginForm({
         <div className="grid gap-2">
           <div className="flex items-center justify-between">
             <Label htmlFor="password">Password</Label>
-            <a href="#" className="text-sm text-muted-foreground hover:underline">
-              Lupa password?
-            </a>
           </div>
           <Input 
             id="password" 
