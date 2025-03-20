@@ -274,34 +274,6 @@ export default function Navbar() {
         </NavigationMenuList>
       </NavigationMenu>
 
-      {/* Authentication links */}
-      <div>
-        {isLoggedIn ? (
-          <div className="flex items-center gap-4">
-            <span className="text-sm hidden md:inline-block">
-              Welcome, <span className="font-semibold">{user?.name}</span>
-              <span className="ml-2 px-2 py-1 text-xs bg-gray-200 dark:bg-gray-700 rounded-full">
-                {user?.role}
-              </span>
-            </span>
-            <button 
-              onClick={logout}
-              className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded text-sm"
-            >
-              Logout
-            </button>
-          </div>
-        ) : (
-          <div className="flex gap-2">
-            <Link href="/login" className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-sm">
-              Login
-            </Link>
-            <Link href="/register" className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 py-2 px-4 rounded text-sm">
-              Register
-            </Link>
-          </div>
-        )}
-      </div>
     </div>
   );
 }
