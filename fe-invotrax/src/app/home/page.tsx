@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import Link from "next/link";
 import {
@@ -10,9 +12,12 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function HomePage() {
+  const { user, logout } = useAuth();
   return (
+
     <div className="min-h-screen flex flex-col">
       {/* Navbar */}
       <header className="border-b">
@@ -24,14 +29,12 @@ export default function HomePage() {
             <MainNav />
           </div>
           <div className="flex items-center gap-4">
-            <Link href="/login" className="text-sm font-medium">
-              Login
-            </Link>
             <Link 
-              href="/register" 
+              href="#"
+              onClick={logout} 
               className="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium"
             >
-              Sign Up
+              Logout
             </Link>
           </div>
         </div>
@@ -40,9 +43,9 @@ export default function HomePage() {
       {/* Main Content */}
       <main className="flex-1 container mx-auto px-4 py-16">
         <div className="flex flex-col items-center justify-center text-center">
-          <h1 className="text-4xl font-bold mb-6">Hello World</h1>
+          <h1 className="text-4xl font-bold mb-6">Welcome, {user?.name}!</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Welcome to your new application built with Next.js and Shadcn UI components.
+            Your role is {user?.role}!
           </p>
         </div>
       </main>

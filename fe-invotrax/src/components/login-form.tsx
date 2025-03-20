@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
+import { log } from "console";
+import { useAuth } from "@/contexts/AuthContext";
 
 export function LoginForm({
   className,
@@ -14,14 +16,17 @@ export function LoginForm({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+  const { login } = useAuth();
+
 
   const handleSubmit = async (e: React.FormEvent) => {
+    
     e.preventDefault();
     setLoading(true);
     setError("");
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/auth/login/", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,17 +36,12 @@ export function LoginForm({
       });
 
       const data = await response.json();
-
       if (!response.ok) {
         throw new Error(data.detail || "Login failed");
       }
 
       if (data.access) {
-        localStorage.setItem("token", data.access);
-        // If you have a refresh token
-        if (data.refresh) {
-          localStorage.setItem("refreshToken", data.refresh);
-        }
+        login(data.access, data.refresh);
       }
 
       // Redirect user to dashboard or home page
