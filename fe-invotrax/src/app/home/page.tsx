@@ -14,6 +14,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import Navbar from "@/components/ui/navbar";
 
 export default function HomePage() {
   const { user, logout } = useAuth();
@@ -27,7 +28,7 @@ export default function HomePage() {
               <Link href="/" className="font-bold text-xl">
                 InvoTrax
               </Link>
-              <MainNav />
+              <Navbar></Navbar>
             </div>
             <div className="flex items-center gap-4">
               <Link 
