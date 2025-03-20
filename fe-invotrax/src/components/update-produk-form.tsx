@@ -69,7 +69,7 @@ export default function UpdateProductForm({
   const fetchCategories = async () => {
     try {
       const categoriesResponse = await fetch(
-        "http://127.0.0.1:8000/api/kategori/",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/kategori/`,
         {
           method: "GET",
           headers: {
@@ -107,7 +107,7 @@ export default function UpdateProductForm({
 
         // Fetch product details
         const productResponse = await fetch(
-          `http://127.0.0.1:8000/api/produk/${productId}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/produk/${productId}`,
           {
             method: "GET",
             headers: {
@@ -120,7 +120,7 @@ export default function UpdateProductForm({
 
         // Fetch categories
         const categoriesResponse = await fetch(
-          "http://127.0.0.1:8000/api/kategori/",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/kategori/`,
           {
             method: "GET",
             headers: {
@@ -134,7 +134,7 @@ export default function UpdateProductForm({
 
         // Fetch suppliers
         const suppliersResponse = await fetch(
-          "http://127.0.0.1:8000/admins/users/?role=vendor",
+          `${process.env.NEXT_PUBLIC_API_URL}/admins/users/?role=vendor`,
           {
             method: "GET",
             headers: {
@@ -267,7 +267,7 @@ export default function UpdateProductForm({
       };
 
       const response = await fetch(
-        `http://127.0.0.1:8000/api/produk/${productId}/update_produk/`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/produk/${productId}/update_produk/`,
         {
           method: "PATCH",
           headers: {

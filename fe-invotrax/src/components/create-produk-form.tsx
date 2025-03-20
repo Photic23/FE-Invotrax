@@ -61,7 +61,7 @@ export default function CreateProductForm() {
   const fetchCategories = async () => {
     try {
       const categoriesResponse = await fetch(
-        "http://127.0.0.1:8000/api/kategori/",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/kategori/`,
         {
           method: "GET",
           headers: {
@@ -90,7 +90,7 @@ export default function CreateProductForm() {
 
         // Fetch suppliers
         const suppliersResponse = await fetch(
-          "http://127.0.0.1:8000/admins/users/?role=vendor",
+          `${process.env.NEXT_PUBLIC_API_URL}/admins/users/?role=vendor`,
           {
             method: "GET",
             headers: {
@@ -199,7 +199,7 @@ export default function CreateProductForm() {
         harga: parseInt(formData.harga),
       };
 
-      const response = await fetch("http://127.0.0.1:8000/api/produk/", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/produk/`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

@@ -111,7 +111,7 @@ export default function ProductTable() {
       
       try {
         // Fetch products
-        const productsResponse = await fetch("http://127.0.0.1:8000/api/produk/", {
+        const productsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/produk/`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -129,7 +129,7 @@ export default function ProductTable() {
         }
         
         // Fetch categories
-        const categoriesResponse = await fetch("http://127.0.0.1:8000/api/kategori/", {
+        const categoriesResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/kategori/`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -140,7 +140,7 @@ export default function ProductTable() {
         setCategories(categoriesData);
         
         // Fetch suppliers
-        const suppliersResponse = await fetch("http://127.0.0.1:8000/admins/users/?role=vendor", {
+        const suppliersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admins/users/?role=vendor`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
