@@ -225,7 +225,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="flex justify-between items-center p-4 border-b">
+    <div className="flex justify-between items-center p-1">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
