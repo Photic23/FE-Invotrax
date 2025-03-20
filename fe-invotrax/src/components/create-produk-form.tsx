@@ -247,7 +247,7 @@ export default function CreateProductForm() {
           <span>Kembali</span>
         </button>
         <CardTitle className="text-2xl font-bold text-center">
-          Create Produk
+          Tambah Produk
         </CardTitle>
       </CardHeader>
       <form onSubmit={handleSubmit}>
@@ -380,7 +380,7 @@ export default function CreateProductForm() {
 
         <CardFooter>
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? "Membuat..." : "Create Produk"}
+            {isLoading ? "Membuat..." : "Tambah Produk"}
           </Button>
         </CardFooter>
       </form>

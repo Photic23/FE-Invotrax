@@ -27,7 +27,6 @@ import {
   ChevronsRight,
   Pencil,
   Plus,
-  Minus,
   X,
   Filter,
 } from "lucide-react";
@@ -96,7 +95,7 @@ export default function ProductTable() {
   const [loading, setLoading] = useState(true);
   const [lowStockProducts, setLowStockProducts] = useState<Product[]>([]);
   const [showAlert, setShowAlert] = useState(true);
-  
+
   // New state for categories and suppliers
   const [categories, setCategories] = useState<Category[]>([]);
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
@@ -108,83 +107,93 @@ export default function ProductTable() {
     async function fetchData() {
       if (!token) return;
       setLoading(true);
-      
+
       try {
         // Fetch products
-        const productsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/produk/`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const productsResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/produk/`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         const productsData = await productsResponse.json();
         setProducts(productsData);
         setFilteredProducts(productsData);
-        
-        const lowStock = productsData.filter((product: Product) => product.stok < 5);
+
+        const lowStock = productsData.filter(
+          (product: Product) => product.stok < 5
+        );
         setLowStockProducts(lowStock);
         if (lowStock.length > 0) {
           setShowAlert(true);
         }
-        
+
         // Fetch categories
-        const categoriesResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/kategori/`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const categoriesResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/kategori/`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         const categoriesData = await categoriesResponse.json();
         setCategories(categoriesData);
-        
+
         // Fetch suppliers
-        const suppliersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admins/users/?role=vendor`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const suppliersResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/admins/users/?role=vendor`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         const suppliersData = await suppliersResponse.json();
         setSuppliers(suppliersData);
-        
       } catch (error) {
         console.error("Error fetching data:", error);
       }
-      
+
       setLoading(false);
     }
-    
+
     fetchData();
   }, [token]);
 
   // Apply filters when search, category, or supplier changes
   useEffect(() => {
     let filtered = [...products];
-    
+
     // Apply name filter
     if (searchName.trim()) {
       filtered = filtered.filter((product) =>
         product.nama.toLowerCase().includes(searchName.toLowerCase())
       );
     }
-    
+
     // Apply category filter
     if (selectedCategory !== null) {
       filtered = filtered.filter(
         (product) => product.kategori_detail?.id === selectedCategory
       );
     }
-    
+
     // Apply supplier filter
     if (selectedSupplier !== null) {
       filtered = filtered.filter(
         (product) => product.vendor_detail?.id === selectedSupplier
       );
     }
-    
+
     setFilteredProducts(filtered);
     // Reset to first page when filters change
     setPagination((prev) => ({ ...prev, pageIndex: 0 }));
@@ -250,7 +259,6 @@ export default function ProductTable() {
           >
             <Pencil className="h-4 w-4" />
           </Button>
-
         </div>
       ),
     },
@@ -318,18 +326,18 @@ export default function ProductTable() {
           </div>
         </Alert>
       )}
-      
+
       {/* Search and Filter Controls */}
       <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-4">
         <div className="flex flex-1 items-center gap-2">
           <Input
             type="text"
-            placeholder="Cari produk..."
+            placeholder="Cari nama produk..."
             value={searchName}
             onChange={(e) => setSearchName(e.target.value)}
             className="w-full"
           />
-          
+
           <Popover open={showFilters} onOpenChange={setShowFilters}>
             <PopoverTrigger asChild>
               <Button variant="outline" className="flex items-center gap-2">
@@ -337,7 +345,8 @@ export default function ProductTable() {
                 Filter
                 {(selectedCategory !== null || selectedSupplier !== null) && (
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-white">
-                    {(selectedCategory !== null ? 1 : 0) + (selectedSupplier !== null ? 1 : 0)}
+                    {(selectedCategory !== null ? 1 : 0) +
+                      (selectedSupplier !== null ? 1 : 0)}
                   </span>
                 )}
               </Button>
@@ -345,12 +354,14 @@ export default function ProductTable() {
             <PopoverContent className="w-80">
               <div className="space-y-4 p-2">
                 <h4 className="font-medium mb-2">Filter Produk</h4>
-                
+
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Kategori</label>
-                  <Select 
+                  <Select
                     value={selectedCategory?.toString() || ""}
-                    onValueChange={(value) => setSelectedCategory(value ? parseInt(value) : null)}
+                    onValueChange={(value) =>
+                      setSelectedCategory(value ? parseInt(value) : null)
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Semua kategori" />
@@ -358,19 +369,24 @@ export default function ProductTable() {
                     <SelectContent>
                       <SelectItem value="all">Semua kategori</SelectItem>
                       {categories.map((category) => (
-                        <SelectItem key={category.id} value={category.id.toString()}>
+                        <SelectItem
+                          key={category.id}
+                          value={category.id.toString()}
+                        >
                           {category.nama}
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
-                
+
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Supplier</label>
-                  <Select 
+                  <Select
                     value={selectedSupplier?.toString() || ""}
-                    onValueChange={(value) => setSelectedSupplier(value ? parseInt(value) : null)}
+                    onValueChange={(value) =>
+                      setSelectedSupplier(value ? parseInt(value) : null)
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Semua supplier" />
@@ -378,14 +394,17 @@ export default function ProductTable() {
                     <SelectContent>
                       <SelectItem value="all">Semua supplier</SelectItem>
                       {suppliers.map((supplier) => (
-                        <SelectItem key={supplier.id} value={supplier.id.toString()}>
+                        <SelectItem
+                          key={supplier.id}
+                          value={supplier.id.toString()}
+                        >
                           {supplier.company_name}
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
-                
+
                 <div className="flex justify-between pt-2">
                   <Button variant="outline" size="sm" onClick={clearFilters}>
                     Reset
@@ -398,20 +417,23 @@ export default function ProductTable() {
             </PopoverContent>
           </Popover>
         </div>
-        
+
         <Button onClick={() => router.push("/produk/create")}>
-          Tambah Produk
+          <Plus className="w-2 h-2 mr-1" /> Tambah Produk
         </Button>
       </div>
-      
+
       {/* Active Filters Display */}
       {(selectedCategory !== null || selectedSupplier !== null) && (
         <div className="flex flex-wrap items-center gap-2 mb-4">
           <span className="text-sm text-gray-500">Filter aktif:</span>
-          
+
           {selectedCategory !== null && (
             <div className="flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-sm">
-              <span>Kategori: {categories.find(c => c.id === selectedCategory)?.nama}</span>
+              <span>
+                Kategori:{" "}
+                {categories.find((c) => c.id === selectedCategory)?.nama}
+              </span>
               <Button
                 variant="ghost"
                 size="icon"
@@ -422,10 +444,13 @@ export default function ProductTable() {
               </Button>
             </div>
           )}
-          
+
           {selectedSupplier !== null && (
             <div className="flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-sm">
-              <span>Supplier: {suppliers.find(s => s.id === selectedSupplier)?.company_name}</span>
+              <span>
+                Supplier:{" "}
+                {suppliers.find((s) => s.id === selectedSupplier)?.company_name}
+              </span>
               <Button
                 variant="ghost"
                 size="icon"
@@ -436,7 +461,7 @@ export default function ProductTable() {
               </Button>
             </div>
           )}
-          
+
           <Button
             variant="ghost"
             size="sm"
