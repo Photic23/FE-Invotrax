@@ -13,24 +13,32 @@ export default function ProtectedRoute({
     children: ReactNode;
     requiredRole?: string | null;
   }) {
-  const { isLoggedIn, user } = useAuth();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      router.push('/login');
-    } else if (requiredRole && user?.role !== requiredRole) {
-      router.push('/unauthorized');
+    const { isLoggedIn, user, isLoading } = useAuth();
+    const router = useRouter();
+  
+    useEffect(() => {
+      // Only redirect after loading is complete
+      if (!isLoading) {
+        if (!isLoggedIn) {
+          router.push('/login');
+        } else if (requiredRole && user?.role !== requiredRole) {
+          router.push('/unauthorized');
+        }
+      }
+    }, [isLoggedIn, user, router, requiredRole, isLoading]);
+  
+    // Show loading state while checking authentication
+    if (isLoading) {
+      return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
     }
-  }, [isLoggedIn, user, router, requiredRole]);
-
-  if (!isLoggedIn) {
-    return null;
+  
+    if (!isLoggedIn) {
+      return null;
+    }
+  
+    if (requiredRole && user?.role !== requiredRole) {
+      return null;
+    }
+  
+    return <>{children}</>;
   }
-
-  if (requiredRole && user?.role !== requiredRole) {
-    return null;
-  }
-
-  return <>{children}</>;
-}

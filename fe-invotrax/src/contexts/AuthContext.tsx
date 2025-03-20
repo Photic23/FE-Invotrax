@@ -14,6 +14,7 @@ interface User {
 interface AuthContextType {
   user: User | null;
   isLoggedIn: boolean;
+  isLoading: boolean;
   login: (token: string, refreshToken: string) => void;
   logout: () => Promise<void>;
   getToken: () => string | null;
@@ -24,33 +25,43 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // Create provider component
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const router = useRouter();
-
-  // Check if user is logged in on initial load
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const decodedUser = parseJwt(token);
-        // Check if token is expired
-        if (decodedUser.exp * 1000 < Date.now()) {
+    const [user, setUser] = useState<User | null>(null);
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const [isLoading, setLoading] = useState<boolean>(true); // Add loading state
+    const router = useRouter();
+  
+    // Check if user is logged in on initial load
+    useEffect(() => {
+      const checkAuth = () => {
+        try {
+          // Only run on client-side where localStorage is available
+          if (typeof window !== 'undefined') {
+            const token = localStorage.getItem('token');
+            if (token) {
+              const decodedUser = parseJwt(token);
+              // Check if token is expired
+              if (decodedUser.exp * 1000 < Date.now()) {
+                handleLogout();
+              } else {
+                setUser({
+                  id: decodedUser.user_id,
+                  name: decodedUser.name,
+                  role: decodedUser.role
+                });
+                setIsLoggedIn(true);
+              }
+            }
+          }
+        } catch (error) {
+          console.error('Invalid token:', error);
           handleLogout();
-        } else {
-          setUser({
-            id: decodedUser.user_id,
-            name: decodedUser.name,
-            role: decodedUser.role
-          });
-          setIsLoggedIn(true);
+        } finally {
+          setLoading(false);
         }
-      } catch (error) {
-        console.error('Invalid token:', error);
-        handleLogout();
-      }
-    }
-  }, []);
+      };
+  
+      checkAuth();
+    }, [router]); // Add router to dependency array
 
   // Function to decode JWT
   const parseJwt = (token: string) => {
@@ -128,6 +139,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       value={{
         user,
         isLoggedIn,
+        isLoading, // Add loading to context
         login: handleLogin,
         logout: handleLogout,
         getToken
