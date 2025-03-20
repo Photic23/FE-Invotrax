@@ -102,7 +102,7 @@ export default function Navbar() {
             },
             {
                 title: "My Orders",
-                href: "/customer/orders",
+                href: "/penawaran-pengadaan",
                 description: "Track your orders and purchase history."
             },
             {
