@@ -13,50 +13,52 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 export default function HomePage() {
   const { user, logout } = useAuth();
   return (
-
-    <div className="min-h-screen flex flex-col">
-      {/* Navbar */}
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-6">
-            <Link href="/" className="font-bold text-xl">
-              InvoTrax
-            </Link>
-            <MainNav />
+    <ProtectedRoute>
+      <div className="min-h-screen flex flex-col">
+        {/* Navbar */}
+        <header className="border-b">
+          <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div className="flex items-center gap-6">
+              <Link href="/" className="font-bold text-xl">
+                InvoTrax
+              </Link>
+              <MainNav />
+            </div>
+            <div className="flex items-center gap-4">
+              <Link 
+                href="#"
+                onClick={logout} 
+                className="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium"
+              >
+                Logout
+              </Link>
+            </div>
           </div>
-          <div className="flex items-center gap-4">
-            <Link 
-              href="#"
-              onClick={logout} 
-              className="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium"
-            >
-              Logout
-            </Link>
+        </header>
+
+        {/* Main Content */}
+        <main className="flex-1 container mx-auto px-4 py-16">
+          <div className="flex flex-col items-center justify-center text-center">
+            <h1 className="text-4xl font-bold mb-6">Welcome, {user?.name}!</h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Your role is {user?.role}!
+            </p>
           </div>
-        </div>
-      </header>
+        </main>
 
-      {/* Main Content */}
-      <main className="flex-1 container mx-auto px-4 py-16">
-        <div className="flex flex-col items-center justify-center text-center">
-          <h1 className="text-4xl font-bold mb-6">Welcome, {user?.name}!</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Your role is {user?.role}!
-          </p>
-        </div>
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t">
-        <div className="container mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Your Company. All rights reserved.
-        </div>
-      </footer>
-    </div>
+        {/* Footer */}
+        <footer className="border-t">
+          <div className="container mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Your Company. All rights reserved.
+          </div>
+        </footer>
+      </div>
+    </ProtectedRoute>
   );
 }
 
