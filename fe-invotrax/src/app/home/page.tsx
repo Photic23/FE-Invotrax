@@ -55,7 +55,7 @@ export default function HomePage() {
         {/* Footer */}
         <footer className="border-t">
           <div className="container mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Your Company. All rights reserved.
+            © {new Date().getFullYear()} PT Karya Bersama Pinto. All rights reserved.
           </div>
         </footer>
       </div>
@@ -110,7 +110,7 @@ function MainNav() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href="/about" legacyBehavior passHref>
+          <Link href="/profile" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               About
             </NavigationMenuLink>
