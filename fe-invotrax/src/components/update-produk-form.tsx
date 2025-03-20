@@ -325,7 +325,7 @@ export default function UpdateProductForm({
           <span>Kembali</span>
         </button>
         <CardTitle className="text-2xl font-bold text-center">
-          Update Produk
+          Ubah Produk
         </CardTitle>
       </CardHeader>
       <form onSubmit={handleSubmit}>
@@ -463,7 +463,7 @@ export default function UpdateProductForm({
 
         <CardFooter>
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? "Menyimpan..." : "Update Produk"}
+            {isLoading ? "Menyimpan..." : "Ubah Produk"}
           </Button>
         </CardFooter>
       </form>
