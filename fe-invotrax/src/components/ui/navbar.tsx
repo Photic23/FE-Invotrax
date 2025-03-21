@@ -76,20 +76,10 @@ export default function Navbar() {
             return [
             ...commonFeatures,
             {
-                title: "My Profile",
-                href: "/customer/profile",
-                description: "View and update your account information."
+                title: "Penawaran Pengadaan",
+                href: "/penawaran-pengadaan",
+                description: "Manage Procurement to Supplier."
             },
-            {
-                title: "My Orders",
-                href: "/customer/orders",
-                description: "Track your orders and purchase history."
-            },
-            {
-                title: "Support",
-                href: "/customer/support",
-                description: "Get help and submit support tickets."
-            }
             ];
         case 'manager':
             return [
