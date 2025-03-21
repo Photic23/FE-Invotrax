@@ -5,6 +5,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Navbar from "@/components/ui/navbar";
 import { useAuth } from "@/contexts/AuthContext";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function PenawaranPengadaanPage() {
   const { logout, getToken } = useAuth();
@@ -30,10 +31,21 @@ export default function PenawaranPengadaanPage() {
         </header>
         
         <div className="space-y-4 p-6">
-          <h1 className="text-4xl font-bold mb-6">Daftar Penawaran Pengadaan</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl">
-            Daftar penawaran yang telah Anda ajukan. Tekan baris untuk melihat detail penawaran.
-          </p>
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-4xl font-bold mb-2">Daftar Penawaran Pengadaan</h1>
+              <p className="text-xl text-muted-foreground max-w-2xl">
+                Daftar penawaran yang telah Anda ajukan. Tekan baris untuk melihat detail penawaran.
+              </p>
+            </div>
+
+            {/* Tombol Buat Penawaran Baru */}
+            <Link href="/penawaran-pengadaan/create">
+              <Button className="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium">
+                Buat Penawaran Baru
+              </Button>
+            </Link>
+          </div>
           <PenawaranTable />
         </div>
       </div>
