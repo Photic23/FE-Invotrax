@@ -51,7 +51,21 @@ export default function Navbar() {
                 title: "Produk",
                 href: "/produk",
                 description: "Manage Products, Stocks, and Categories."
+            },{
+                title: "Customer Management",
+                href: "/staff/customers",
+                description: "View and manage customer accounts."
             },
+            {
+                title: "Support Tickets",
+                href: "/staff/tickets",
+                description: "Handle customer support requests."
+            },
+            {
+                title: "Daftar Request Pengadaan",
+                href: "/pengajuan_penawaran_pengadaan",
+                description: "Lihat Daftar Request Pengadaan."
+            }
             ];
         case 'customer':
             return [
