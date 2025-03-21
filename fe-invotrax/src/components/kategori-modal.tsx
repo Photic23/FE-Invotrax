@@ -77,11 +77,11 @@ export default function CategoryModal({
     const token = localStorage.getItem("token");
 
     try {
-      let url = `${process.env.NEXT_PUBLIC_API_URL}/api/kategori/`;
+      let url = `${process.env.NEXT_PUBLIC_API_URL}/api/manajemen_stok/kategori/`;
       let method = "POST";
 
       if (isEdit && selectedCategory) {
-        url = `${process.env.NEXT_PUBLIC_API_URL}/api/kategori/${selectedCategory.id}/update_kategori/`;
+        url = `${process.env.NEXT_PUBLIC_API_URL}/api/manajemen_stok/kategori/${selectedCategory.id}/update_kategori/`;
         method = "PATCH";
       }
 

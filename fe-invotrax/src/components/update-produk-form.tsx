@@ -69,7 +69,7 @@ export default function UpdateProductForm({
   const fetchCategories = async () => {
     try {
       const categoriesResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/kategori/`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/manajemen_stok/kategori/`,
         {
           method: "GET",
           headers: {
@@ -107,7 +107,7 @@ export default function UpdateProductForm({
 
         // Fetch product details
         const productResponse = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/produk/${productId}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/manajemen_stok/produk/${productId}`,
           {
             method: "GET",
             headers: {
@@ -120,7 +120,7 @@ export default function UpdateProductForm({
 
         // Fetch categories
         const categoriesResponse = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/kategori/`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/manajemen_stok/kategori/`,
           {
             method: "GET",
             headers: {
@@ -267,7 +267,7 @@ export default function UpdateProductForm({
       };
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/produk/${productId}/update_produk/`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/manajemen_stok/produk/${productId}/update_produk/`,
         {
           method: "PATCH",
           headers: {

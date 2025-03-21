@@ -111,7 +111,7 @@ export default function ProductTable() {
       try {
         // Fetch products
         const productsResponse = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/produk/`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/manajemen_stok/produk/`,
           {
             method: "GET",
             headers: {
@@ -134,7 +134,7 @@ export default function ProductTable() {
 
         // Fetch categories
         const categoriesResponse = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/kategori/`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/manajemen_stok/kategori/`,
           {
             method: "GET",
             headers: {

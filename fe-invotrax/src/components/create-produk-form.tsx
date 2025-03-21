@@ -61,7 +61,7 @@ export default function CreateProductForm() {
   const fetchCategories = async () => {
     try {
       const categoriesResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/kategori/`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/manajemen_stok/kategori/`,
         {
           method: "GET",
           headers: {
@@ -199,7 +199,7 @@ export default function CreateProductForm() {
         harga: parseInt(formData.harga),
       };
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/produk/`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/manajemen_stok/produk/`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

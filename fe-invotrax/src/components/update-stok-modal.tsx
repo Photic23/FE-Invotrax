@@ -58,7 +58,7 @@ export function StockUpdateModal({
     
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/produk/${product.id}/update_produk/`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/manajemen_stok/produk/${product.id}/update_produk/`,
         {
           method: "PATCH",
           headers: {
