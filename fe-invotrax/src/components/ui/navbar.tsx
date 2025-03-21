@@ -68,9 +68,9 @@ export default function Navbar() {
                 description: "Handle customer support requests."
             },
             {
-                title: "Reports",
-                href: "/staff/reports",
-                description: "Access customer and operational reports."
+                title: "Daftar Request Pengadaan",
+                href: "/pengajuan_penawaran_pengadaan",
+                description: "Lihat Daftar Request Pengadaan."
             }
             ];
         case 'customer':
