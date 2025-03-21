@@ -94,22 +94,22 @@ export default function Navbar() {
             ];
         case 'vendor': //atau supplier
             return [
-            ...commonFeatures,
-            {
-                title: "My Profile",
-                href: "/customer/profile",
-                description: "View and update your account information."
-            },
-            {
-                title: "My Orders",
-                href: "/penawaran-pengadaan",
-                description: "Track your orders and purchase history."
-            },
-            {
-                title: "Support",
-                href: "/customer/support",
-                description: "Get help and submit support tickets."
-            }
+              ...commonFeatures,
+              {
+                  title: "Customer Management",
+                  href: "/staff/customers",
+                  description: "View and manage customer accounts."
+              },
+              {
+                  title: "Support Tickets",
+                  href: "/staff/tickets",
+                  description: "Handle customer support requests."
+              },
+              {
+                  title: "Reports",
+                  href: "/staff/reports",
+                  description: "Access customer and operational reports."
+              }
             ];
         case 'manager':
             return [
