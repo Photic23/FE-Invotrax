@@ -48,7 +48,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
     async function fetchProductDetail() {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/produk/${productId}/detail_produk/`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/manajemen_stok/produk/${productId}/detail_produk/`,
           {
             method: "GET",
             headers: {
