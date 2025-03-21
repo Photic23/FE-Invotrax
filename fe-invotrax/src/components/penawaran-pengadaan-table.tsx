@@ -31,7 +31,7 @@ export default function PenawaranTable() {
       const fetchPenawaran = async () => {
         try {
           const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/api/penawaran-pengadaan/daftar_penawaran_pengadaan/`,
+            `${process.env.NEXT_PUBLIC_API_URL}/api/penawaran/daftar_penawaran_pengadaan/`,
             {
               method: "GET",
               headers: { 

@@ -65,7 +65,7 @@ export default function EditPenawaranPengadaanForm({ penawaranId }: EditPenawara
           fetch(`${process.env.NEXT_PUBLIC_API_URL}/admins/users/?role=vendor`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/penawaran-pengadaan/${penawaranId}/`, {
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/penawaran/${penawaranId}/`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
@@ -110,7 +110,7 @@ export default function EditPenawaranPengadaanForm({ penawaranId }: EditPenawara
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/penawaran-pengadaan/${penawaranId}/update_penawaran/`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/penawaran/${penawaranId}/update_penawaran/`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
