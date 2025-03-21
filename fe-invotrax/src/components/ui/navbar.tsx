@@ -35,43 +35,23 @@ export default function Navbar() {
             ...commonFeatures,
             {
                 title: "User Management",
-                href: "/admin/users",
+                href: "/admin/users/list",
                 description: "Manage all users and permissions."
             },
             {
-                title: "Settings",
-                href: "/admin/settings",
-                description: "Configure system settings and preferences."
+                title: "Add User",
+                href: "/admin/users/add",
+                description: "Add new user."
             },
-            {
-                title: "Reports",
-                href: "/admin/reports",
-                description: "Access advanced analytics and reporting."
-            },
-            {
-                title: "System Logs",
-                href: "/admin/logs",
-                description: "View system activity and error logs."
-            }
             ];
         case 'staff':
             return [
             ...commonFeatures,
             {
-                title: "Customer Management",
-                href: "/staff/customers",
-                description: "View and manage customer accounts."
+                title: "Produk",
+                href: "/produk",
+                description: "Manage Products, Stocks, and Categories."
             },
-            {
-                title: "Support Tickets",
-                href: "/staff/tickets",
-                description: "Handle customer support requests."
-            },
-            {
-                title: "Reports",
-                href: "/staff/reports",
-                description: "Access customer and operational reports."
-            }
             ];
         case 'customer':
             return [
@@ -229,7 +209,7 @@ export default function Navbar() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/" legacyBehavior passHref>
+            <Link href="/home" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 Home
               </NavigationMenuLink>
@@ -250,7 +230,7 @@ export default function Navbar() {
             </NavigationMenuContent>
           </NavigationMenuItem>
           
-          {/* Resources menu - content changes based on role */}
+          {/* Resources menu - content changes based on role
           <NavigationMenuItem>
             <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
             <NavigationMenuContent>
@@ -262,7 +242,7 @@ export default function Navbar() {
                 ))}
               </ul>
             </NavigationMenuContent>
-          </NavigationMenuItem>
+          </NavigationMenuItem> */}
           
           <NavigationMenuItem>
             <Link href="/user/detail" legacyBehavior passHref>
