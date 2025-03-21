@@ -41,7 +41,7 @@ export function RegisterForm({
           "Content-Type": "application/json",
         },
         body: JSON.stringify(requestBody),
-        credentials: "include", // This is important for cookies if your backend uses them
+        // credentials: "include", // This is important for cookies if your backend uses them
       });
 
       const data = await response.json();
