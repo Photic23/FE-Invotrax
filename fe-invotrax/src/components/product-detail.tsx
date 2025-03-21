@@ -85,7 +85,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
   const handleDeleteProduct = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/produk/${productId}/hapus_produk/`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/manajemen_stok/produk/${productId}/hapus_produk/`,
         {
           method: "DELETE",
           headers: {
