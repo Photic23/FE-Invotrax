@@ -1,15 +1,17 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "fe-invotrax/package.json",
-        "use": "@vercel/next"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "fe-invotrax/$1"
-      }
-    ]
-  }
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "buildCommand": "cd fe-invotrax && npm run build",
+  "outputDirectory": "fe-invotrax/.next"
+}
